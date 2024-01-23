@@ -1,0 +1,21 @@
+.cats-enter {
+  /* opacity: 0; */
+  height: 0px;
+  /* transform: scale(0.9); */
+}
+.cats-enter-active {
+  /* opacity: 1; */
+  height: 350px;
+  transform: translateX(0);
+  transition: all 200ms, transform 200ms;
+}
+.cats-exit {
+  /* opacity: 1; */
+  height: 350px;
+}
+.cats-exit-active {
+  /* opacity: 0; */
+  height: 0px;
+  /* transform: scale(0.9); */
+  transition: all 200ms, transform 200ms;
+}
