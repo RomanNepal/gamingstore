@@ -5,6 +5,8 @@ import Slider from "react-slick";
 import axios from "axios";
 import "./Slider.css";
 import Skeleton from "./Skeleton";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { Link } from "react-router-dom";
 const HomeSlider = () => {
   const settings = {
     focusOnSelect: true,
@@ -14,6 +16,7 @@ const HomeSlider = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
+    lazyLoading: true,
     customPaging: (i) => (
       <div
         style={{
@@ -28,6 +31,8 @@ const HomeSlider = () => {
     ),
   };
   const [featured, setFeatured] = useState();
+  const images = [0, 1, 2];
+  const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -51,39 +56,55 @@ const HomeSlider = () => {
     getFeatured();
   }, []);
   return (
-    <div style={{ marginTop: "1rem", width: "940px", height: "500px" }}>
-      <Slider style={{ onfocus: "" }} {...settings}>
-        {featured?.length
-          ? featured?.map((product, index) => {
-              return (
-                <div
-                  className="slider"
-                  style={
-                    {
-                      // overflow: "hidden",
-                      // height: loading ? "500px" : "500px",
-                    }
-                  }
-                  key={product.id}
-                >
-                  {loading ? (
-                    <Skeleton />
-                  ) : (
-                    <img
-                      src={product.image.url}
-                      alt="carouselimage"
-                      style={{
-                        height: "500px",
-                        width: "100%",
-                        objectFit: "contain",
-                      }}
-                    ></img>
-                  )}
-                </div>
-              );
-            })
-          : ""}
-      </Slider>
+    <div
+      style={{
+        display: "flex",
+        marginTop: "1rem",
+        width: "100%",
+        height: "500px",
+      }}
+    >
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <>
+          <div
+            style={{ display: "flex", alignItems: "center", color: "gray" }}
+            onClick={() => {
+              if (currentImage == 0) {
+                setCurrentImage(2);
+              } else {
+                setCurrentImage(currentImage - 1);
+              }
+            }}
+          >
+            <BiChevronLeft />
+          </div>
+          <div style={{ height: "100%", width: "100%" }}>
+            <Link
+              to={`/product/${featured ? featured[currentImage]?.id : ""}`}
+              state={{
+                iamge: featured ? featured[currentImage]?.image.url : "",
+                name: featured ? featured[currentImage]?.name : "",
+                price: featured ? featured[currentImage]?.price : "",
+              }}
+            >
+              <img
+                src={featured ? featured[currentImage]?.image?.url : ""}
+                height={"100%"}
+                width={"100%"}
+                style={{ objectFit: "contain" }}
+              ></img>
+            </Link>
+          </div>
+          <div
+            style={{ display: "flex", alignItems: "center", color: "gray" }}
+            onClick={() => setCurrentImage((currentImage + 1) % 3)}
+          >
+            <BiChevronRight />
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -126,14 +126,15 @@ const SecondNavbar = ({ children }) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "0.45fr 1.55fr",
+          gridTemplateColumns: "0.5fr 1.5fr",
           //   padding: "0 9%",
-          paddingLeft: "0.5rem",
+          marginLeft: "9%",
+          marginRight: "9%",
           //   columnGap: "20px",
         }}
       >
         <div></div>
-        <div style={{ marginRight: "12%" }}>{children}</div>
+        <div>{children}</div>
       </div>
       {/* <SecondWrapper>
         <CSSTransition

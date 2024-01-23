@@ -27,7 +27,8 @@ const Wrapper = styled.div`
   }
 
   .card__description {
-    height: 100px;
+    height: 500px;
+    width: 100%;
   }
 
   @keyframes shimmer {

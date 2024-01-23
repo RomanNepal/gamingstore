@@ -90,7 +90,10 @@ const Home = () => {
       <Announcement />
       <BelowAnnouncement />
       <Navbar />
-      <SecondNavbar> {loading ? <Skeleton /> : <HomeSlider />}</SecondNavbar>
+      <SecondNavbar>
+        {" "}
+        <HomeSlider />
+      </SecondNavbar>
       <Body>
         <div
           style={{
