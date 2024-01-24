@@ -81,9 +81,9 @@ const HomeSlider = () => {
           <Link
             to={`/product/${featured ? featured[currentImage]?.id : ""}`}
             state={{
-              iamge: featured ? featured[currentImage]?.image.url : "",
+              image: featured ? featured[currentImage]?.image.url : "",
               name: featured ? featured[currentImage]?.name : "",
-              price: featured ? featured[currentImage]?.price : "",
+              price: featured ? featured[currentImage]?.price.formatted : "",
             }}
           >
             {loading ? (
