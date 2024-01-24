@@ -64,47 +64,47 @@ const HomeSlider = () => {
         height: "500px",
       }}
     >
-      {loading ? (
-        <Skeleton />
-      ) : (
-        <>
-          <div
-            style={{ display: "flex", alignItems: "center", color: "gray" }}
-            onClick={() => {
-              if (currentImage == 0) {
-                setCurrentImage(2);
-              } else {
-                setCurrentImage(currentImage - 1);
-              }
+      <>
+        <div
+          style={{ display: "flex", alignItems: "center", color: "gray" }}
+          onClick={() => {
+            if (currentImage == 0) {
+              setCurrentImage(2);
+            } else {
+              setCurrentImage(currentImage - 1);
+            }
+          }}
+        >
+          <BiChevronLeft />
+        </div>
+        <div style={{ height: "100%", width: "100%" }}>
+          <Link
+            to={`/product/${featured ? featured[currentImage]?.id : ""}`}
+            state={{
+              iamge: featured ? featured[currentImage]?.image.url : "",
+              name: featured ? featured[currentImage]?.name : "",
+              price: featured ? featured[currentImage]?.price : "",
             }}
           >
-            <BiChevronLeft />
-          </div>
-          <div style={{ height: "100%", width: "100%" }}>
-            <Link
-              to={`/product/${featured ? featured[currentImage]?.id : ""}`}
-              state={{
-                iamge: featured ? featured[currentImage]?.image.url : "",
-                name: featured ? featured[currentImage]?.name : "",
-                price: featured ? featured[currentImage]?.price : "",
-              }}
-            >
+            {loading ? (
+              <Skeleton />
+            ) : (
               <img
                 src={featured ? featured[currentImage]?.image?.url : ""}
                 height={"100%"}
                 width={"100%"}
                 style={{ objectFit: "contain" }}
               ></img>
-            </Link>
-          </div>
-          <div
-            style={{ display: "flex", alignItems: "center", color: "gray" }}
-            onClick={() => setCurrentImage((currentImage + 1) % 3)}
-          >
-            <BiChevronRight />
-          </div>
-        </>
-      )}
+            )}
+          </Link>
+        </div>
+        <div
+          style={{ display: "flex", alignItems: "center", color: "gray" }}
+          onClick={() => setCurrentImage((currentImage + 1) % 3)}
+        >
+          <BiChevronRight />
+        </div>
+      </>
     </div>
   );
 };
