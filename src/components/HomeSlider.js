@@ -1,12 +1,30 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
+
 import axios from "axios";
 import "./Slider.css";
 import Skeleton from "./Skeleton";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+const IconDiv = styled.div`
+  transition: 0.2s all ease;
+  &:hover {
+    background-color: rgba(211, 211, 211, 0.5);
+  }
+  display: flex;
+  align-items: center;
+  color: gray;
+  cursor: pointer;
+`;
+const StyledDiv = styled.div`
+  transition: 0.5s all ease;
+`;
+
+const Image = styled.img`
+  transition: 0.5 all ease;
+`;
 const HomeSlider = () => {
   const settings = {
     focusOnSelect: true,
@@ -65,8 +83,13 @@ const HomeSlider = () => {
       }}
     >
       <>
-        <div
-          style={{ display: "flex", alignItems: "center", color: "gray" }}
+        <IconDiv
+          style={{
+            display: "flex",
+            alignItems: "center",
+            color: "gray",
+            cursor: "pointer",
+          }}
           onClick={() => {
             if (currentImage == 0) {
               setCurrentImage(2);
@@ -76,8 +99,16 @@ const HomeSlider = () => {
           }}
         >
           <BiChevronLeft />
-        </div>
-        <div style={{ height: "100%", width: "100%" }}>
+        </IconDiv>
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+
+            userSelect: "none",
+            position: "relative",
+          }}
+        >
           <Link
             to={`/product/${featured ? featured[currentImage]?.id : ""}`}
             state={{
@@ -89,21 +120,47 @@ const HomeSlider = () => {
             {loading ? (
               <Skeleton />
             ) : (
-              <img
+              <Image
                 src={featured ? featured[currentImage]?.image?.url : ""}
                 height={"100%"}
                 width={"100%"}
                 style={{ objectFit: "contain" }}
-              ></img>
+              ></Image>
             )}
           </Link>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "1rem",
+              left: "45%",
+              display: "flex",
+              gap: "10px",
+            }}
+          >
+            {images.map((item, index) => (
+              <StyledDiv
+                style={{
+                  height: "2px",
+                  width: "20px",
+                  backgroundColor: index === currentImage ? "black" : "white",
+                  border:
+                    index === currentImage
+                      ? "1px solid black"
+                      : "0.5px solid #d6d6d6",
+                }}
+                onClick={() => {
+                  setCurrentImage(index);
+                }}
+              ></StyledDiv>
+            ))}
+          </div>
         </div>
-        <div
-          style={{ display: "flex", alignItems: "center", color: "gray" }}
+        <IconDiv
+          style={{}}
           onClick={() => setCurrentImage((currentImage + 1) % 3)}
         >
           <BiChevronRight />
-        </div>
+        </IconDiv>
       </>
     </div>
   );
