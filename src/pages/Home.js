@@ -182,22 +182,27 @@ const Home = () => {
             </svg>
           </HomeCard>
         </div>
-        <Info title="Newest In Electronics">
-          {electronics?.length
-            ? electronics.map((product, index) => {
-                return (
-                  <ProductCard
-                    key={product.image.url}
-                    id={product.id}
-                    image={product.image.url}
-                    name={product.name}
-                    price={product.price.formatted}
-                    tag={product.categories[0].name}
-                  />
-                );
-              })
-            : ""}
-        </Info>
+        {loading ? (
+          <Skeleton />
+        ) : (
+          <Info title="Newest In Electronics">
+            {electronics?.length
+              ? electronics.map((product, index) => {
+                  return (
+                    <ProductCard
+                      key={product.image.url}
+                      id={product.id}
+                      image={product.image.url}
+                      name={product.name}
+                      price={product.price.formatted}
+                      tag={product.categories[0].name}
+                    />
+                  );
+                })
+              : ""}
+          </Info>
+        )}
+
         <div>
           <p
             style={{ fontWeight: "500", fontSize: "24px", textAlign: "center" }}

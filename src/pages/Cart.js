@@ -49,8 +49,9 @@ const Tdata = styled.td`
 const Text = styled.p`
   color: ${(props) => (props ? props.color : "black")};
 `;
-const Cart = ({}) => {
+const Cart = () => {
   const { cart, addToCart, decreaseItem } = useContext(CartContext);
+  const [carts, setCart] = useState(cart.length > 0 ? cart : []);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
@@ -61,7 +62,7 @@ const Cart = ({}) => {
         cart[i].quantity *
           Number(cart[i].price.split(".")[0].split(",").join(""));
     }
-    console.log("total is: ", total);
+
     setTotalPrice(total);
   }, [cart]);
 
@@ -103,66 +104,73 @@ const Cart = ({}) => {
 
                 <Th>TOTAL PRICE</Th>
               </Trow>
-              {cart?.map((item, index) => (
-                <Trow>
-                  <Tdata>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          height: "100px",
-                          width: "100px",
-                          border: "1px solid #e6e6e6",
-                          borderRadius: "12px",
-                        }}
-                      >
-                        <img
-                          src={item.image}
+              {carts?.length > 0
+                ? carts?.map((item, index) => (
+                    <Trow key={index}>
+                      <Tdata>
+                        <div
                           style={{
-                            height: "100%",
-                            width: "100%",
-                            borderRadius: "inherit",
-                            objectFit: "cover",
+                            display: "flex",
+                            alignItems: "center",
                           }}
-                        ></img>
-                      </div>
-                    </div>
-                  </Tdata>
-                  <Tdata style={{ textAlign: "left" }}>
-                    <Text>{item.name}</Text>
-                  </Tdata>
-                  <Tdata>
-                    {/* <input
+                        >
+                          <div
+                            style={{
+                              height: "100px",
+                              width: "100px",
+                              border: "1px solid #e6e6e6",
+                              borderRadius: "12px",
+                            }}
+                          >
+                            <img
+                              src={item.image}
+                              style={{
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "inherit",
+                                objectFit: "cover",
+                              }}
+                            ></img>
+                          </div>
+                        </div>
+                      </Tdata>
+                      <Tdata style={{ textAlign: "left" }}>
+                        <Text>{item.name}</Text>
+                      </Tdata>
+                      <Tdata>
+                        {/* <input
                       type="text"
                       value={item.quantity}
                       onChange={() => {
                         addToCart(item.id, item.name);
                       }}
                     ></input> */}
-                    <button onClick={() => decreaseItem(index)}>-</button>
-                    {item.quantity}
-                    <button
-                      onClick={() =>
-                        addToCart(item.id, item.name, item.image, item.price)
-                      }
-                    >
-                      +
-                    </button>
-                  </Tdata>
-                  <Tdata>Rs. {item.price.split(".")[0]}</Tdata>
-                  <Tdata>
-                    Rs.{" "}
-                    {(
-                      item.price.split(".")[0].split(",").join("") *
-                      item.quantity
-                    ).toLocaleString()}
-                  </Tdata>
-                </Trow>
-              ))}
+                        <button onClick={() => decreaseItem(index)}>-</button>
+                        {item.quantity}
+                        <button
+                          onClick={() =>
+                            addToCart(
+                              item.id,
+                              item.name,
+                              item.image,
+                              item.price
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </Tdata>
+                      <Tdata>Rs. {item.price.split(".")[0]}</Tdata>
+                      <Tdata>
+                        Rs.{" "}
+                        {(
+                          item.price.split(".")[0].split(",").join("") *
+                          item.quantity
+                        ).toLocaleString()}
+                      </Tdata>
+                    </Trow>
+                  ))
+                : ""}
               {/* <Trow style={{}}>
                 <Tdata dark>Sub-total</Tdata>
                 <Tdata colSpan={4} dark style={{ padding: "10px" }}>
