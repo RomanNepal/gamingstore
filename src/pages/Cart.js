@@ -64,7 +64,7 @@ const Cart = () => {
     }
 
     setTotalPrice(total);
-  }, [cart]);
+  }, [carts]);
 
   return (
     <>
