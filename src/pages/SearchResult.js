@@ -70,6 +70,8 @@ const SearchResult = () => {
           `${process.env.REACT_APP_BASE_URL}/products${
             state?.searchByCategory
               ? `?category_id=${query}`
+              : state?.searchByProductAndCategory
+              ? `?category_id=${state.category_id}&query=${query}`
               : `?query=${query}`
           }`,
           {
@@ -87,7 +89,7 @@ const SearchResult = () => {
       }
     };
     getProducts();
-  }, [query]);
+  }, [query, state]);
   return (
     <>
       <Announcement />

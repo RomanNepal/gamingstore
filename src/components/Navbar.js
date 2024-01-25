@@ -103,8 +103,9 @@ const InfoCircle = styled.div`
 export const Navbar = () => {
   const { categories, loading } = useContext(NavbarContext);
   const { cart, totalCartItems } = useContext(CartContext);
-
   const [toggle, setToggle] = useState(false);
+  const [cat, setCat] = useState("");
+  const [catName, setCatName] = useState("");
   const toggleMenu = (e) => {
     setToggle((prev) => !prev);
   };
@@ -113,9 +114,20 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     if (e.key === "Enter" && query !== "") {
-      navigate(`/searchresult/${query}`);
+      navigate(`/searchresult/${query}`, {
+        state: {
+          searchByProduct: cat.length === 0,
+          searchByProductAndCategory: cat.length > 0,
+          category_id: cat,
+          name: query,
+        },
+      });
+      setQuery("");
+      setCat("");
+      setCatName("");
     }
   };
+
   return (
     <Wrapper>
       <LogoandHam>
@@ -181,7 +193,8 @@ export const Navbar = () => {
           }}
         >
           <Button onClick={toggleMenu}>
-            {loading ? "Loading..." : "Select Category"} <GoChevronDown />
+            {loading ? "Loading..." : catName ? catName : "Select Category"}{" "}
+            <GoChevronDown />
           </Button>
           {/* {toggle && ( */}
           <CSSTransition
@@ -190,11 +203,21 @@ export const Navbar = () => {
             timeout={300}
             unmountOnExit
             classNames={"menu"}
+            style={{ zIndex: "10" }}
           >
-            <MenuItems ref={nodeRef}>
+            <MenuItems ref={nodeRef} style={{ zIndex: "10" }}>
               {categories?.length !== 0 &&
                 categories?.map((category, index) => (
-                  <MenuItem key={category.id}>{category?.name}</MenuItem>
+                  <MenuItem
+                    key={category.id}
+                    onClick={() => {
+                      setCat(category.id);
+                      setCatName(category.name);
+                      nodeRef.current.style.height = "0px";
+                    }}
+                  >
+                    {category?.name}
+                  </MenuItem>
                 ))}
             </MenuItems>
           </CSSTransition>
