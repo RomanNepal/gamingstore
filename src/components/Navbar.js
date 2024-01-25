@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   border-bottom: 1px solid #dfe0e2;
   border-top: 1px solid #dfe0e2;
   display: flex;
+  gap: 2rem;
   align-items: center;
   justify-content: space-between;
 `;
@@ -25,8 +26,8 @@ const LogoandHam = styled.div`
   align-items: center;
 `;
 const Logo = styled.img`
-  height: 50%;
-  width: 50%;
+  height: 50px;
+  width: 50px;
   margin-left: 20px;
 `;
 
@@ -141,7 +142,7 @@ export const Navbar = () => {
       </LogoandHam>
       <div
         style={{
-          width: "60%",
+          width: "55%",
           height: "50%",
           display: "flex",
           objectFit: "cover",
@@ -205,7 +206,7 @@ export const Navbar = () => {
           <IoPersonOutline size={24} color={"#3F3F3F"} />
         </div>
         <div style={{ position: "relative" }}>
-          <FaRegHeart size={20} color={"#3F3F3F"} />
+          <FaRegHeart size={22} color={"#3F3F3F"} />
           <InfoCircle>0</InfoCircle>
         </div>
         <Link to={"/cart"}>
