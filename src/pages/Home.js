@@ -58,6 +58,23 @@ const MenuItem = styled.div`
 const Body = styled.div`
   margin: 0.8em 9%;
 `;
+const HomeCardWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  border-top: 1px solid #dee0ea;
+  padding: 0.8em 0;
+  gap: 3rem;
+  @media screen and (min-width: 0px) and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: 1025px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+`;
 
 const Home = () => {
   const { categories } = useContext(NavbarContext);
@@ -95,16 +112,7 @@ const Home = () => {
         <HomeSlider />
       </SecondNavbar>
       <Body>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            borderTop: "1px solid #DEE0EA",
-
-            padding: "0.8em 0",
-            gap: "3rem",
-          }}
-        >
+        <HomeCardWrapper style={{}}>
           <HomeCard
             title="Free Shipping"
             description="Free Shipping for orders over Rs. 130"
@@ -181,7 +189,7 @@ const Home = () => {
               />
             </svg>
           </HomeCard>
-        </div>
+        </HomeCardWrapper>
         {loading ? (
           <Skeleton />
         ) : (
