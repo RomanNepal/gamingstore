@@ -3,9 +3,20 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import CartContext from "../context/CartContext";
 import { IoMdHeartEmpty } from "react-icons/io";
-
+const Wrapper = styled.div`
+  height: 400px;
+  width: 260px;
+  @media screen and (min-width: 0px) and (max-width: 768px) {
+    height: 90%;
+    width: 90%;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+  }
+  @media screen and (min-width: 1025px) {
+  }
+`;
 const PrimaryButton = styled.button`
-  font-family: "Inter";
+  font-family: Inter;
   background-color: #1f1f1f;
   color: white;
   width: 100%;
@@ -19,6 +30,11 @@ const PrimaryButton = styled.button`
   gap: 10px;
   transition: 0.2s all ease;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+    gap: 6px;
+    height: 2.75em;
+  }
   &:hover {
     background-color: white;
     color: black;
@@ -66,7 +82,7 @@ const ProductCard = ({ image, name, price, tag, id }) => {
     btn.current.style.strokeWidth = "2";
   };
   return (
-    <div style={{ height: "400px", width: "260px" }}>
+    <Wrapper style={{}}>
       <Link
         to={`/product/${id}`}
         state={{ image, name, price }}
@@ -165,7 +181,7 @@ const ProductCard = ({ image, name, price, tag, id }) => {
           </SecondaryButton>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

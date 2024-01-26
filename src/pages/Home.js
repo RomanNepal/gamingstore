@@ -17,6 +17,21 @@ import Skeleton from "../components/Skeleton";
 const Wrapper = styled.div`
   font-family: "Inter", sans-serif;
 `;
+const CategoryWrapper = styled.div`
+  display: grid;
+  row-gap: 2rem;
+  column-gap: 2rem;
+
+  @media screen and (min-width: 0px) and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: 1025px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+`;
 
 const Hero = styled.div`
   padding: 0 9%;
@@ -217,15 +232,8 @@ const Home = () => {
           >
             Search By Category
           </p>
-          <div
-            style={{
-              display: "grid",
 
-              rowGap: "2rem",
-              columnGap: "2rem",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr",
-            }}
-          >
+          <CategoryWrapper>
             {categories?.length
               ? categories.map((category, index) => {
                   return (
@@ -240,7 +248,7 @@ const Home = () => {
                   );
                 })
               : ""}
-          </div>
+          </CategoryWrapper>
         </div>
       </Body>
     </Wrapper>
