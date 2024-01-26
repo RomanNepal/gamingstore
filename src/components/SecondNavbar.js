@@ -19,6 +19,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 `;
 const AllCategories = styled.div`
   border-right: 1px solid #dfe0e2;
@@ -73,6 +76,16 @@ const CategoryList = styled.div`
 `;
 
 const Category = styled.div``;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+
+  margin-left: 9%;
+  margin-right: 9%;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+`;
 const SecondNavbar = ({ children }) => {
   const { categories, setCategories, loading } = useContext(NavbarContext);
   const [toggle, setToggle] = useState(true);
@@ -123,19 +136,10 @@ const SecondNavbar = ({ children }) => {
           <StyledLink to={"/"}>ELECTRONICS</StyledLink>
         </NavGroup>
       </Wrapper>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "0.5fr 1.5fr",
-          //   padding: "0 9%",
-          marginLeft: "9%",
-          marginRight: "9%",
-          //   columnGap: "20px",
-        }}
-      >
+      <Grid style={{}}>
         <div></div>
         <div>{children}</div>
-      </div>
+      </Grid>
       {/* <SecondWrapper>
         <CSSTransition
           in={toggle}

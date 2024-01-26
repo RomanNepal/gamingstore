@@ -9,11 +9,14 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `;
 const Announcement = () => {
   return (
     <Wrapper>
-      <div>
+      <div style={{ margin: "auto" }}>
         SUMMER SALE FOR ALL SWIM SUITS AND FREE EXPRESS INTERNATIONAL DELIVERY -
         OFF 50%! SHOP NOW
       </div>

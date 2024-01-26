@@ -21,9 +21,25 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+const LogoLink = styled(Link)`
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`;
+const Ham = styled.div`
+  height: 24px;
+  width: 24px;
+  display: flex;
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`;
 const LogoandHam = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 `;
 const Logo = styled.img`
   height: 50px;
@@ -99,7 +115,25 @@ const InfoCircle = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
+const SearchBarWrapper = styled.div`
+  width: 55%;
+  height: 50%;
+  display: flex;
+  object-fit: cover;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+`;
+const Profile = styled.div`
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+`;
+const Heart = styled.div`
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+`;
 export const Navbar = () => {
   const { categories, loading } = useContext(NavbarContext);
   const { cart, totalCartItems } = useContext(CartContext);
@@ -152,14 +186,27 @@ export const Navbar = () => {
           <Logo src={logo} alt="Logo"></Logo>
         </Link>
       </LogoandHam>
-      <div
-        style={{
-          width: "55%",
-          height: "50%",
-          display: "flex",
-          objectFit: "cover",
-        }}
-      >
+      <Ham>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      </Ham>
+      <LogoLink to={"/"}>
+        {" "}
+        <Logo src={logo} alt="Logo"></Logo>
+      </LogoLink>
+      <SearchBarWrapper style={{}}>
         <div
           style={{
             display: "flex",
@@ -181,7 +228,7 @@ export const Navbar = () => {
             console.log(query);
           }}
           onKeyDown={handleSubmit}
-        ></SearchBar>
+        />
         <div
           style={{
             width: "25%",
@@ -223,15 +270,15 @@ export const Navbar = () => {
           </CSSTransition>
           {/* )} */}
         </div>
-      </div>
+      </SearchBarWrapper>
       <div style={{ display: "flex", gap: "20px" }}>
-        <div>
+        <Profile>
           <IoPersonOutline size={24} color={"#3F3F3F"} />
-        </div>
-        <div style={{ position: "relative" }}>
+        </Profile>
+        <Heart style={{ position: "relative" }}>
           <FaRegHeart size={22} color={"#3F3F3F"} />
           <InfoCircle>0</InfoCircle>
-        </div>
+        </Heart>
         <Link to={"/cart"}>
           <div style={{ position: "relative" }}>
             <BsCart2 size={24} color={"#3F3F3F"} />

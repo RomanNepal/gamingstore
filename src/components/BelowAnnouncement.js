@@ -9,6 +9,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 9%;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 const Text = styled.p`
   font-weight: ${(props) => (props.semibold ? 500 : "normal")};
