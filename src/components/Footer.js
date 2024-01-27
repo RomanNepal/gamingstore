@@ -13,9 +13,13 @@ const Wrapper = styled.div`
 const LinkGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
   column-gap: 2em;
   padding: 5% 0;
   border-bottom: 1px solid white;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const Text = styled.p`
   font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};

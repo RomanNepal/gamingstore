@@ -15,18 +15,27 @@ const Wrapper = styled.div`
 `;
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 0.6fr 1.4fr;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5rem;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Col1 = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 3rem;
 `;
 
 const Col2 = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 9%;
+  /* padding: 0 9%; */
   align-items: top;
 `;
 const Button = styled.button`
@@ -41,6 +50,18 @@ const Button = styled.button`
     background-color: white;
     border: 1px solid black;
     color: black;
+  }
+`;
+const ImageDiv = styled.div`
+  height: 30rem;
+  width: 100%;
+  @media screen and (max-width: 768px) {
+    height: 30rem;
+    width: 100%;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    height: 400px;
+    width: 100%;
   }
 `;
 const stars = [1, 2, 3, 4, 5];
@@ -103,10 +124,8 @@ const Product = () => {
       <Wrapper>
         <Grid>
           <Col1>
-            <div
+            <ImageDiv
               style={{
-                height: "500px",
-                width: "500px",
                 border: "1px solid #e4e4e4",
                 borderRadius: "16px",
                 transition: "1s all ease-out",
@@ -131,7 +150,7 @@ const Product = () => {
                   }}
                 ></img>
               )}
-            </div>
+            </ImageDiv>
 
             <div
               style={{
