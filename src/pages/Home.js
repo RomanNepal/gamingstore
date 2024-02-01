@@ -38,6 +38,9 @@ const CategoryWrapper = styled.div`
 
 const Body = styled.div`
   margin: 0.8em 9%;
+  @media screen and (max-width: 768px) {
+    margin: 0.8em 5%;
+  }
 `;
 const HomeCardWrapper = styled.div`
   display: grid;
@@ -81,6 +84,7 @@ const HeadphoneDiv = styled.div`
   }
   .innerDiv {
     gap: 1rem;
+    padding-left: 2rem;
   }
   @media screen and (max-width: 768px) {
     .title {
@@ -89,6 +93,7 @@ const HeadphoneDiv = styled.div`
     }
     .innerDiv {
       gap: 0;
+      padding-left: 1rem;
     }
     height: 30vh;
   }
@@ -111,6 +116,20 @@ const SecondDiv = styled.div`
   }
 `;
 const StyledSpan = styled.span``;
+const Image = styled.img`
+  height: 100%;
+  width: 100%;
+  @media screen and (max-width: 768px) {
+    height: 90%;
+    width: 90%;
+  }
+`;
+const ImageDiv = styled.div`
+  right: 1rem;
+  @media screen and (max-width: 768px) {
+    right: 0;
+  }
+`;
 const Home = () => {
   const { categories } = useContext(NavbarContext);
 
@@ -282,7 +301,6 @@ const Home = () => {
                   display: "flex",
                   flexDirection: "column",
 
-                  paddingLeft: "2rem",
                   justifyContent: "center",
 
                   position: "absolute",
@@ -445,7 +463,7 @@ const Home = () => {
                       alignItems: "center",
                       marginTop: "1rem",
                       color: "gray",
-                      width: "65%",
+                      width: "60%",
                     }}
                   >
                     {gamingEssentials?.[1].description}
@@ -471,27 +489,24 @@ const Home = () => {
                     </span>
                   </Link>
                 </div>
-                <div
+                <ImageDiv
                   style={{
                     width: "45%",
                     height: "100%",
                     position: "absolute",
-                    right: "1rem",
                   }}
                 >
-                  <img
+                  <Image
                     src={`${gamingEssentials?.[1].assets[0].url}`}
-                    height={"100%"}
-                    width={"100%"}
                     style={{ objectFit: "contain" }}
-                  ></img>
-                </div>
+                  ></Image>
+                </ImageDiv>
               </div>
             </SecondDiv>
           </GEGrid>
         </div>
 
-        <div>
+        <div style={{ marginTop: "3rem" }}>
           <p
             style={{ fontWeight: "500", fontSize: "24px", textAlign: "center" }}
           >
