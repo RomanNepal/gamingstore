@@ -26,7 +26,6 @@ const CategoryWrapper = styled.div`
   justify-items: center;
   @media screen and (min-width: 0px) and (max-width: 768px) {
     grid-template-columns: 1fr;
-
     align-items: center;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
@@ -61,11 +60,12 @@ const HomeCardWrapper = styled.div`
 const GEGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   column-gap: 1.75rem;
   row-gap: 1rem;
+  margin-top: 2rem;
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
+    row-gap: 0rem;
   }
 `;
 
@@ -75,10 +75,42 @@ const HeadphoneDiv = styled.div`
   background-color: #fafafa;
   position: relative;
   height: 60vh;
+  .title {
+    font-weight: 500;
+    width: 50%;
+  }
+  .innerDiv {
+    gap: 1rem;
+  }
   @media screen and (max-width: 768px) {
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .innerDiv {
+      gap: 0;
+    }
+    height: 30vh;
   }
 `;
 
+const SecondDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .title {
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 768px) {
+    height: 50vh;
+    margin-top: 1rem;
+    .title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+`;
+const StyledSpan = styled.span``;
 const Home = () => {
   const { categories } = useContext(NavbarContext);
 
@@ -242,14 +274,14 @@ const Home = () => {
           <GEGrid>
             <HeadphoneDiv>
               <div
+                className="innerDiv"
                 style={{
                   width: "75%",
                   height: "100%",
-                  fontSize: "3rem",
-                  fontWeight: "500",
+
                   display: "flex",
                   flexDirection: "column",
-                  gap: "1rem",
+
                   paddingLeft: "2rem",
                   justifyContent: "center",
 
@@ -257,7 +289,9 @@ const Home = () => {
                   left: "0",
                 }}
               >
-                {gamingEssentials?.[2].name}
+                <StyledSpan className="title">
+                  {gamingEssentials?.[2].name}
+                </StyledSpan>
                 <span
                   className="span"
                   style={{
@@ -309,26 +343,19 @@ const Home = () => {
                 ></img>
               </div>
             </HeadphoneDiv>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-              }}
-            >
+            <SecondDiv>
               <div
                 style={{
                   height: "50%",
                   position: "relative",
-                  backgroundColor: "#fafafa",
+                  backgroundColor: "#F8DDD6",
                 }}
               >
                 <div
                   style={{
                     width: "75%",
                     height: "100%",
-                    fontSize: "2rem",
-                    fontWeight: "500",
+
                     display: "flex",
                     flexDirection: "column",
                     gap: "0rem",
@@ -338,7 +365,7 @@ const Home = () => {
                     left: "0",
                   }}
                 >
-                  {gamingEssentials?.[0].name}
+                  <span className="title"> {gamingEssentials?.[0].name}</span>
                   <span
                     style={{
                       fontSize: "14px",
@@ -392,7 +419,7 @@ const Home = () => {
                 style={{
                   height: "50%",
                   position: "relative",
-                  backgroundColor: "#F8DDD6",
+                  backgroundColor: "#fafafa",
                 }}
               >
                 <div
@@ -410,7 +437,7 @@ const Home = () => {
                     left: "0",
                   }}
                 >
-                  {gamingEssentials?.[1].name}
+                  <span className="title"> {gamingEssentials?.[1].name}</span>
                   <span
                     style={{
                       fontSize: "14px",
@@ -460,7 +487,7 @@ const Home = () => {
                   ></img>
                 </div>
               </div>
-            </div>
+            </SecondDiv>
           </GEGrid>
         </div>
 
