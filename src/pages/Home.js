@@ -22,9 +22,12 @@ const CategoryWrapper = styled.div`
   display: grid;
   row-gap: 2rem;
   column-gap: 2rem;
-
+  text-align: center;
+  justify-items: center;
   @media screen and (min-width: 0px) and (max-width: 768px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+
+    align-items: center;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     grid-template-columns: 1fr 1fr 1fr;
