@@ -25,11 +25,15 @@ const CategoryWrapper = styled.div`
   text-align: center;
   justify-items: center;
   @media screen and (min-width: 0px) and (max-width: 1400px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
+    column-gap: 1rem;
+    row-gap: 1rem;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    column-gap: 1rem;
   }
   @media screen and (min-width: 1025px) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -79,7 +83,7 @@ const HeadphoneDiv = styled.div`
   position: relative;
   height: 60vh;
   .title {
-    font-weight: 500;
+    font-weight: 600;
     width: 50%;
   }
   .innerDiv {
@@ -89,7 +93,7 @@ const HeadphoneDiv = styled.div`
   @media screen and (max-width: 1400px) {
     .title {
       font-size: 22px;
-      font-weight: bold;
+      font-weight: 600;
     }
     .innerDiv {
       gap: 0;

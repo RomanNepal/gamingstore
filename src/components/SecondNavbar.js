@@ -136,7 +136,7 @@ const SecondNavbar = ({ children }) => {
           <StyledLink to={"/"}>ELECTRONICS</StyledLink>
         </NavGroup>
       </Wrapper>
-      <Grid style={{}}>
+      <Grid>
         <div></div>
         <div>{children}</div>
       </Grid>
