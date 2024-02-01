@@ -84,6 +84,8 @@ const Grid = styled.div`
   margin-right: 9%;
   @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 `;
 const SecondNavbar = ({ children }) => {
