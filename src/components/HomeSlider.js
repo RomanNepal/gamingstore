@@ -33,9 +33,19 @@ const StyledDiv = styled.div`
 const Image = styled.img`
   transition: 0.5 all ease;
 `;
+const DotsWrapper = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  left: 45%;
+  display: flex;
+  gap: 10px;
+  @media screen and (max-width: 768px) {
+    left: 40%;
+  }
+`;
 const HomeSlider = () => {
   // const settings = {
-  //   focusOnSelect: true,
+  //   focusOnSelect: true;
   //   dots: true,
   //   infinite: true,
   //   speed: 500,
@@ -189,15 +199,7 @@ const HomeSlider = () => {
           <BiChevronLeft />
         </IconDiv>
 
-        <div
-          style={{
-            position: "absolute",
-            bottom: "1rem",
-            left: "45%",
-            display: "flex",
-            gap: "10px",
-          }}
-        >
+        <DotsWrapper style={{}}>
           {images.map((item, index) => (
             <StyledDiv
               style={{
@@ -214,7 +216,7 @@ const HomeSlider = () => {
               }}
             ></StyledDiv>
           ))}
-        </div>
+        </DotsWrapper>
         <IconDiv
           style={{
             display: hover ? "flex" : "none",

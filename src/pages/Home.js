@@ -24,7 +24,7 @@ const CategoryWrapper = styled.div`
   column-gap: 2rem;
   text-align: center;
   justify-items: center;
-  @media screen and (min-width: 0px) and (max-width: 768px) {
+  @media screen and (min-width: 0px) and (max-width: 1400px) {
     grid-template-columns: 1fr;
     align-items: center;
   }
@@ -38,7 +38,7 @@ const CategoryWrapper = styled.div`
 
 const Body = styled.div`
   margin: 0.8em 9%;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     margin: 0.8em 5%;
   }
 `;
@@ -49,7 +49,7 @@ const HomeCardWrapper = styled.div`
   border-top: 1px solid #dee0ea;
   padding: 0.8em 0;
   gap: 3rem;
-  @media screen and (min-width: 0px) and (max-width: 768px) {
+  @media screen and (min-width: 0px) and (max-width: 1400px) {
     grid-template-columns: 1fr;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
@@ -66,7 +66,7 @@ const GEGrid = styled.div`
   column-gap: 1.75rem;
   row-gap: 1rem;
   margin-top: 2rem;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     grid-template-columns: 1fr;
     row-gap: 0rem;
   }
@@ -86,7 +86,7 @@ const HeadphoneDiv = styled.div`
     gap: 1rem;
     padding-left: 2rem;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     .title {
       font-size: 22px;
       font-weight: bold;
@@ -105,8 +105,9 @@ const SecondDiv = styled.div`
   gap: 1rem;
   .title {
     font-size: 2rem;
+    font-weight: 600;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     height: 50vh;
     margin-top: 1rem;
     .title {
@@ -119,14 +120,14 @@ const StyledSpan = styled.span``;
 const Image = styled.img`
   height: 100%;
   width: 100%;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     height: 90%;
     width: 90%;
   }
 `;
 const ImageDiv = styled.div`
   right: 1rem;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     right: 0;
   }
 `;

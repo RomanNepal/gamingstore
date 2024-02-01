@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+  height: 100%;
   .card__skeleton {
     background-image: linear-gradient(
       90deg,
