@@ -111,6 +111,9 @@ const SecondDiv = styled.div`
     font-size: 2rem;
     font-weight: 600;
   }
+  .innerDiv {
+    padding-left: 2rem;
+  }
   @media screen and (max-width: 1400px) {
     height: 50vh;
     margin-top: 1rem;
@@ -118,6 +121,15 @@ const SecondDiv = styled.div`
       font-size: 1.4rem;
       font-weight: 600;
     }
+    .innerDiv {
+      padding-left: 1rem;
+    }
+  }
+`;
+const DownDiv = styled.div`
+  padding-left: 2rem;
+  @media screen and (max-width: 1400px) {
+    padding-left: 1rem;
   }
 `;
 const StyledSpan = styled.span``;
@@ -375,6 +387,7 @@ const Home = () => {
                 }}
               >
                 <div
+                  className="innerDiv"
                   style={{
                     width: "75%",
                     height: "100%",
@@ -382,7 +395,7 @@ const Home = () => {
                     display: "flex",
                     flexDirection: "column",
                     gap: "0rem",
-                    paddingLeft: "2rem",
+
                     justifyContent: "center",
                     position: "absolute",
                     left: "0",
@@ -445,7 +458,7 @@ const Home = () => {
                   backgroundColor: "#fafafa",
                 }}
               >
-                <div
+                <DownDiv
                   style={{
                     width: "75%",
                     height: "100%",
@@ -454,7 +467,6 @@ const Home = () => {
                     display: "flex",
                     flexDirection: "column",
                     gap: "0rem",
-                    paddingLeft: "2rem",
                     justifyContent: "center",
                     position: "absolute",
                     left: "0",
@@ -493,7 +505,7 @@ const Home = () => {
                       Explore <BiRightArrowCircle />
                     </span>
                   </Link>
-                </div>
+                </DownDiv>
                 <ImageDiv
                   style={{
                     width: "45%",
