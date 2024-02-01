@@ -71,16 +71,7 @@ const ProductCard = ({ image, name, price, tag, id }) => {
   const { cart, addToCart, totalCartItems, setTotalCartItems } =
     useContext(CartContext);
   const btn = useRef(null);
-  const setRedColor = () => {
-    // btn.current.style.fill = "red";
-    // btn.current.style.stroke = "red";
-    // btn.current.style.strokeWidth = "0";
-  };
-  const setDefaultColor = () => {
-    btn.current.style.fill = "none";
-    btn.current.style.stroke = "black";
-    btn.current.style.strokeWidth = "2";
-  };
+
   return (
     <Wrapper style={{}}>
       <Link
@@ -94,7 +85,7 @@ const ProductCard = ({ image, name, price, tag, id }) => {
             width: "100%",
             //   objectFit: "cover",
             borderRadius: "10px",
-            backgroundColor: "gray",
+            backgroundColor: "#fafafa",
             position: "relative",
           }}
         >

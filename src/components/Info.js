@@ -20,7 +20,7 @@ const Info = ({ title, children }) => {
       <p style={{ fontWeight: "500", fontSize: "24px", textAlign: "center" }}>
         {title}
       </p>
-      <ChildrenWrapper style={{}}>{children}</ChildrenWrapper>
+      <ChildrenWrapper>{children}</ChildrenWrapper>
     </div>
   );
 };

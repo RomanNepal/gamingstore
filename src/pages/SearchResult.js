@@ -63,6 +63,7 @@ const SearchResult = () => {
   console.log("State in searchresult is: ", state);
   console.log("query is: ", query);
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 });
     setLoading(true);
     const getProducts = async () => {
       try {

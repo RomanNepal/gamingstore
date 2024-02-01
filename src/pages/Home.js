@@ -11,8 +11,9 @@ import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import Announcement from "../components/Announcement";
 import BelowAnnouncement from "../components/BelowAnnouncement";
-import BreadcrumContext from "../context/BreadcrumContext";
 import Skeleton from "../components/Skeleton";
+import { BiRightArrow, BiRightArrowCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   font-family: "Inter", sans-serif;
@@ -31,43 +32,6 @@ const CategoryWrapper = styled.div`
   @media screen and (min-width: 1025px) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
-`;
-
-const Hero = styled.div`
-  padding: 0 9%;
-  display: grid;
-  grid-template-columns: 0.45fr 1.55fr;
-`;
-const MenuItems = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  position: absolute;
-  top: 2.8rem;
-  font-size: 14px;
-  border: 1px solid #f6f6f6;
-  background-color: white;
-  width: 100%;
-
-  overflow: hidden;
-
-  padding-top: 5px;
-  padding-bottom: 5px;
-  /* transition: 1s all ease; */
-`;
-
-const MenuItem = styled.div`
-  padding: 2px 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-
-  &:hover {
-    background-color: black;
-    color: white;
-  }
-  transition: 0.3s all ease;
 `;
 
 const Body = styled.div`
@@ -91,10 +55,32 @@ const HomeCardWrapper = styled.div`
   }
 `;
 
+const GEGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 1.75rem;
+  row-gap: 1rem;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const HeadphoneDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: #fafafa;
+  position: relative;
+  height: 60vh;
+  @media screen and (max-width: 768px) {
+  }
+`;
+
 const Home = () => {
   const { categories } = useContext(NavbarContext);
 
   const [electronics, setelectronics] = useState();
+  const [gamingEssentials, setGamingEssentials] = useState();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getFeatured = async () => {
@@ -115,6 +101,29 @@ const Home = () => {
       }
     };
     getFeatured();
+  }, []);
+
+  useEffect(() => {
+    const getGamingEssentials = async () => {
+      setLoading(true);
+      try {
+        let ge = await axios.get(
+          "https://api.chec.io/v1/categories?parent_id=cat_Op1YoV8EylXLv9",
+
+          {
+            headers: {
+              "X-Authorization": `${process.env.REACT_APP_PUBLIC_KEY}`,
+            },
+          }
+        );
+        setGamingEssentials(ge.data.data);
+        console.log(ge.data.data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getGamingEssentials();
   }, []);
 
   return (
@@ -225,6 +234,232 @@ const Home = () => {
               : ""}
           </Info>
         )}
+
+        <div>
+          <GEGrid>
+            <HeadphoneDiv>
+              <div
+                style={{
+                  width: "75%",
+                  height: "100%",
+                  fontSize: "3rem",
+                  fontWeight: "500",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  paddingLeft: "2rem",
+                  justifyContent: "center",
+
+                  position: "absolute",
+                  left: "0",
+                }}
+              >
+                {gamingEssentials?.[2].name}
+                <span
+                  className="span"
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    alignItems: "center",
+                    marginTop: "1rem",
+                    color: "gray",
+                    width: "65%",
+                  }}
+                >
+                  {gamingEssentials?.[2].description}
+                </span>
+                <Link
+                  to={`/searchresult/${gamingEssentials?.[2].id}`}
+                  state={{
+                    searchByCategory: true,
+                    name: gamingEssentials?.[2].name,
+                  }}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <span
+                    style={{
+                      fontSize: "16px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      marginTop: "1rem",
+                    }}
+                  >
+                    Explore <BiRightArrowCircle />
+                  </span>
+                </Link>
+              </div>
+
+              <div
+                style={{
+                  width: "45%",
+                  height: "100%",
+                  position: "absolute",
+                  right: "0",
+                }}
+              >
+                <img
+                  src={`${gamingEssentials?.[2].assets[0].url}`}
+                  height={"100%"}
+                  width={"100%"}
+                  style={{ objectFit: "contain" }}
+                ></img>
+              </div>
+            </HeadphoneDiv>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+              }}
+            >
+              <div
+                style={{
+                  height: "50%",
+                  position: "relative",
+                  backgroundColor: "#fafafa",
+                }}
+              >
+                <div
+                  style={{
+                    width: "75%",
+                    height: "100%",
+                    fontSize: "2rem",
+                    fontWeight: "500",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0rem",
+                    paddingLeft: "2rem",
+                    justifyContent: "center",
+                    position: "absolute",
+                    left: "0",
+                  }}
+                >
+                  {gamingEssentials?.[0].name}
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      alignItems: "center",
+                      marginTop: "1rem",
+                      color: "gray",
+                      width: "80%",
+                    }}
+                  >
+                    {gamingEssentials?.[0].description}
+                  </span>
+                  <Link
+                    to={`/searchresult/${gamingEssentials?.[0].id}`}
+                    state={{
+                      searchByCategory: true,
+                      name: gamingEssentials?.[0].name,
+                    }}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        marginTop: "1rem",
+                      }}
+                    >
+                      Explore <BiRightArrowCircle />
+                    </span>
+                  </Link>
+                </div>
+                <div
+                  style={{
+                    width: "45%",
+                    height: "100%",
+                    position: "absolute",
+                    right: "0",
+                  }}
+                >
+                  <img
+                    src={`${gamingEssentials?.[0].assets[0].url}`}
+                    height={"100%"}
+                    width={"100%"}
+                    style={{ objectFit: "contain" }}
+                  ></img>
+                </div>
+              </div>
+              <div
+                style={{
+                  height: "50%",
+                  position: "relative",
+                  backgroundColor: "#F8DDD6",
+                }}
+              >
+                <div
+                  style={{
+                    width: "75%",
+                    height: "100%",
+                    fontSize: "2rem",
+                    fontWeight: "500",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0rem",
+                    paddingLeft: "2rem",
+                    justifyContent: "center",
+                    position: "absolute",
+                    left: "0",
+                  }}
+                >
+                  {gamingEssentials?.[1].name}
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      alignItems: "center",
+                      marginTop: "1rem",
+                      color: "gray",
+                      width: "65%",
+                    }}
+                  >
+                    {gamingEssentials?.[1].description}
+                  </span>
+                  <Link
+                    to={`/searchresult/${gamingEssentials?.[1].id}`}
+                    state={{
+                      searchByCategory: true,
+                      name: gamingEssentials?.[1].name,
+                    }}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        marginTop: "1rem",
+                      }}
+                    >
+                      Explore <BiRightArrowCircle />
+                    </span>
+                  </Link>
+                </div>
+                <div
+                  style={{
+                    width: "45%",
+                    height: "100%",
+                    position: "absolute",
+                    right: "1rem",
+                  }}
+                >
+                  <img
+                    src={`${gamingEssentials?.[1].assets[0].url}`}
+                    height={"100%"}
+                    width={"100%"}
+                    style={{ objectFit: "contain" }}
+                  ></img>
+                </div>
+              </div>
+            </div>
+          </GEGrid>
+        </div>
 
         <div>
           <p
