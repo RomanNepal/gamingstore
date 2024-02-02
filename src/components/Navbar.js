@@ -183,10 +183,17 @@ const SideBar = styled.div`
   }
   .firstDiv {
     overflow: scroll;
+    width: 40%;
+    @media screen and (max-width: 768px) {
+      width: 50%;
+    }
   }
   .secondDiv {
     background-color: rgba(0, 0, 0, 0.5);
     width: 60%;
+    @media screen and (max-width: 768px) {
+      width: 50%;
+    }
     height: inherit;
   }
 `;
@@ -227,7 +234,6 @@ export const Navbar = () => {
           className="firstDiv"
           style={{
             padding: "1rem 0",
-            width: "40%",
             height: "inherit",
             backgroundColor: "white",
             display: "flex",
