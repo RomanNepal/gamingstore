@@ -185,14 +185,14 @@ const SideBar = styled.div`
     overflow: scroll;
     width: 40%;
     @media screen and (max-width: 768px) {
-      width: 50%;
+      width: 60%;
     }
   }
   .secondDiv {
     background-color: rgba(0, 0, 0, 0.5);
     width: 60%;
     @media screen and (max-width: 768px) {
-      width: 50%;
+      width: 40%;
     }
     height: inherit;
   }
