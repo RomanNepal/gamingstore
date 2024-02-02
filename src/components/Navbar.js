@@ -4,13 +4,15 @@ import logo from "../images/logo.png";
 import NavbarContext from "../context/NavbarContext";
 import { GoChevronDown } from "react-icons/go";
 import { IoPersonOutline } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaCross, FaRegHeart } from "react-icons/fa6";
 import { BsCart2, BsSearch } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { CSSTransition } from "react-transition-group";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import CartContext from "../context/CartContext";
+import { RxCross2 } from "react-icons/rx";
+
 const Wrapper = styled.div`
   height: 86px;
   padding: 0 9%;
@@ -20,6 +22,29 @@ const Wrapper = styled.div`
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
+  /* width */
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    padding-left: 1rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props) => (props.inside ? "#d0d0d0" : "white")};
+    border-radius: 16px;
+    margin-left: 1rem;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: gray;
+  }
 `;
 const LogoLink = styled(Link)`
   @media screen and (min-width: 1024px) {
@@ -134,12 +159,45 @@ const Heart = styled.div`
     display: none;
   }
 `;
+const Hams = styled.div`
+  display: flex;
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`;
+const SideBar = styled.div`
+  position: fixed;
+  display: flex;
+
+  top: 0rem;
+  height: 110vh;
+  width: 100vw;
+  left: ${(props) => (props.open ? "0" : "-100vw")};
+
+  font-size: 0.9rem;
+  transition: left 0.5s;
+
+  z-index: 3;
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+  .firstDiv {
+    overflow: scroll;
+  }
+  .secondDiv {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 60%;
+    height: inherit;
+  }
+`;
 export const Navbar = () => {
   const { categories, loading } = useContext(NavbarContext);
   const { cart, totalCartItems } = useContext(CartContext);
   const [toggle, setToggle] = useState(false);
   const [cat, setCat] = useState("");
   const [catName, setCatName] = useState("");
+  const [open, setOpen] = useState(false);
+  const [inside, setInside] = useState(false);
   const toggleMenu = (e) => {
     setToggle((prev) => !prev);
   };
@@ -163,9 +221,83 @@ export const Navbar = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper inside={inside}>
+      <SideBar open={open}>
+        <div
+          className="firstDiv"
+          style={{
+            padding: "1rem 0",
+            width: "40%",
+            height: "inherit",
+            backgroundColor: "white",
+            display: "flex",
+            flexDirection: "column",
+          }}
+          onMouseEnter={() => {
+            setInside(true);
+          }}
+          onMouseLeave={() => {
+            setInside(false);
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "0",
+              alignItems: "center",
+            }}
+          >
+            <Link to={"/"}>
+              {" "}
+              <Logo src={logo} alt="Logo"></Logo>
+            </Link>
+            <div>
+              <RxCross2
+                size={24}
+                style={{
+                  cursor: "pointer",
+                  marginRight: "1rem",
+                  backgroundColor: "#e9e9e9",
+                }}
+                onClick={() => {
+                  setOpen(false);
+                }}
+              />
+            </div>
+          </div>
+          {categories?.length !== 0 &&
+            categories?.map((category, index) => (
+              <div
+                key={category.id}
+                style={{
+                  display: "flex",
+                  padding: "1rem 1rem",
+                }}
+                onClick={() => {
+                  setCat(category.id);
+                  setCatName(category.name);
+                  nodeRef.current.style.height = "0px";
+                }}
+              >
+                <Link
+                  to={`/searchresult/${category.id}`}
+                  state={{ searchByCategory: true, name: category.name }}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontWeight: "500",
+                  }}
+                >
+                  {category?.name}
+                </Link>
+              </div>
+            ))}
+        </div>
+        <div className="secondDiv"></div>
+      </SideBar>
       <LogoandHam>
-        <div style={{ height: "24px", width: "24px", display: "flex" }}>
+        <Hams style={{ height: "24px", width: "24px" }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -180,13 +312,18 @@ export const Navbar = () => {
               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
             />
           </svg>
-        </div>
+        </Hams>
         <Link to={"/"}>
           {" "}
           <Logo src={logo} alt="Logo"></Logo>
         </Link>
       </LogoandHam>
-      <Ham>
+      <Ham
+        onClick={() => {
+          console.log("open is: ", open);
+          setOpen(!open);
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -206,7 +343,7 @@ export const Navbar = () => {
         {" "}
         <Logo src={logo} alt="Logo"></Logo>
       </LogoLink>
-      <SearchBarWrapper style={{}}>
+      <SearchBarWrapper>
         <div
           style={{
             display: "flex",
