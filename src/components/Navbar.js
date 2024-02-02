@@ -274,11 +274,6 @@ export const Navbar = () => {
                   display: "flex",
                   padding: "1rem 1rem",
                 }}
-                onClick={() => {
-                  setCat(category.id);
-                  setCatName(category.name);
-                  nodeRef.current.style.height = "0px";
-                }}
               >
                 <Link
                   to={`/searchresult/${category.id}`}
