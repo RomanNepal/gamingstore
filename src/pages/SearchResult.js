@@ -16,6 +16,9 @@ const Left = styled.div`
   width: 20%;
   margin: 4% 0;
   padding: 0em 0 0 9%;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 const Right = styled.div`
   width: 80%;
